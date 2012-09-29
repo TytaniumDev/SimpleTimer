@@ -2,13 +2,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
+    
     <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="60sp"
+        android:gravity="center"
+        android:text="@string/default_time" />
+    
+    <Button
+        android:id="@+id/stopbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/timerTextView"
+        android:text="STOP" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/timerTextView"
+        android:text="Button" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/stopbutton"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
+        android:layout_margin="15dp" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/numpad1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np1" />
+
+            <Button
+                android:id="@+id/numpad2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np2" />
+
+            <Button
+                android:id="@+id/numpad3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np3" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/numpad4"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np4" />
+
+            <Button
+                android:id="@+id/numpad5"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np5" />
+
+            <Button
+                android:id="@+id/numpad6"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np6" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/numpad7"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np7" />
+
+            <Button
+                android:id="@+id/numpad8"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np8" />
+
+            <Button
+                android:id="@+id/numpad9"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np9" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/Button03"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="X" />
+
+            <Button
+                android:id="@+id/numpad0"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="@string/np0" />
+
+            <Button
+                android:id="@+id/Button01"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                style="@android:style/TextAppearance.Large"
+                android:text="X" />
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>
