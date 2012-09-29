@@ -15,10 +15,8 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int Button01=0x7f050012;
-        public static final int Button03=0x7f050010;
         public static final int button1=0x7f050002;
-        public static final int numpad0=0x7f050011;
+        public static final int numpad0=0x7f050010;
         public static final int numpad1=0x7f050004;
         public static final int numpad2=0x7f050005;
         public static final int numpad3=0x7f050006;

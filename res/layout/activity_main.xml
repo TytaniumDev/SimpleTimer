@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/timerTextView"
-        android:text="STOP" />
+        android:text="Stop/Clear" />
 
     <Button
         android:id="@+id/button1"
@@ -134,15 +134,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/Button03"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                style="@android:style/TextAppearance.Large"
-                android:text="X" />
-
             <Button
                 android:id="@+id/numpad0"
                 android:layout_width="fill_parent"
@@ -150,14 +141,6 @@
                 android:layout_weight="1"
                 style="@android:style/TextAppearance.Large"
                 android:text="@string/np0" />
-
-            <Button
-                android:id="@+id/Button01"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                style="@android:style/TextAppearance.Large"
-                android:text="X" />
         </TableRow>
     </TableLayout>
 

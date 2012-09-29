@@ -35,6 +35,12 @@ public class SimpleTimerActivity extends Activity {
 				AlarmUtil.startTimer(getApplicationContext(), AlarmUtil.convertStringToMilliseconds(mTime));
 			}
 		});
+        ((Button) findViewById(R.id.stopbutton)).setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				mTime = "";
+				mTimeView.setText(R.string.default_time);
+			}
+		});
         mTimeView = (TextView) findViewById(R.id.timerTextView);
         mNumpad0 = (Button) findViewById(R.id.numpad0);
         mNumpad1 = (Button) findViewById(R.id.numpad1);
