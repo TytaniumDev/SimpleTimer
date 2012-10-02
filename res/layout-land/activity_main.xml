@@ -5,50 +5,48 @@
 
     <TextView
         android:id="@+id/timerTextView"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/default_time"
+        android:layout_margin="8dp"
         android:textSize="60sp" />
 
     <LinearLayout
         android:id="@+id/startStopLayout"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@id/timerTextView"
-        android:orientation="horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/numpadTable"
+        android:orientation="vertical"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_centerHorizontal="true" >
+        android:layout_marginRight="16dp" >
 
             <Button
                 android:id="@+id/stopbutton"
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="4dp"
                 android:textSize="26sp"
                 android:text="@string/stop_clear" />
 
             <Button
                 android:id="@+id/startbutton"
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
                 android:textSize="26sp"
-                android:layout_weight="1"
                 android:text="@string/start" />
     </LinearLayout>
 
     <TableLayout
+        android:id="@+id/numpadTable"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/startStopLayout"
-        android:layout_centerHorizontal="true"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/timerTextView"
         android:layout_margin="16dp" >
 
         <TableRow

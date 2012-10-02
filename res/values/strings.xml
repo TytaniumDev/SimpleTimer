@@ -14,8 +14,8 @@
     <string name="np9">9</string>
     <string name="np0">0</string>
     <string name="start">Start</string>
-    <string name="clear">Clear</string>
-    <string name="stop">Stop</string>
+    <string name="stop_clear">Stop/Clear</string>
     <string name="default_time">00:00:00</string>
-
+    <string name="notification_popup_msg">Alarm Started</string>
+    <string name="notification_content_text">Alarm On</string>
 </resources>
