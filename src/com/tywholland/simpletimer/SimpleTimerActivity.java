@@ -15,7 +15,7 @@ public class SimpleTimerActivity extends Activity {
 	private static final String ALARM_TIME = "alarmkey";
 
 	private String mTime;
-	private Button mButton;
+	private Button mStartButton;
 	private Button mNumpad1;
 	private Button mNumpad2;
 	private Button mNumpad3;
@@ -39,8 +39,8 @@ public class SimpleTimerActivity extends Activity {
 		mCountingDown = false;
 		mAlarmApplication = (AlarmApplication) getApplicationContext();
 		mTime = "";
-		mButton = (Button) findViewById(R.id.startbutton);
-		mButton.setOnClickListener(new OnClickListener() {
+		mStartButton = (Button) findViewById(R.id.startbutton);
+		mStartButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				mAlarmApplication.stopTimer();
 				mAlarmApplication.startTimer(AlarmUtil
@@ -49,6 +49,7 @@ public class SimpleTimerActivity extends Activity {
 				startTextCountdown();
 				mTime = "";
 				mCountingDown = true;
+				updateButtons();
 			}
 		});
 		mStopButton = (Button) findViewById(R.id.stopbutton);
@@ -59,6 +60,7 @@ public class SimpleTimerActivity extends Activity {
 				mAlarmApplication.stopTimer();
 				stopTextCountdown();
 				mCountingDown = false;
+				updateButtons();
 			}
 		});
 		mTimeView = (TextView) findViewById(R.id.timerTextView);
@@ -83,6 +85,7 @@ public class SimpleTimerActivity extends Activity {
 		mNumpad8.setOnClickListener(numpadButtonClickListener());
 		mNumpad9.setOnClickListener(numpadButtonClickListener());
 		restoreTime();
+		updateButtons();
 	}
 
 	@Override
@@ -136,6 +139,7 @@ public class SimpleTimerActivity extends Activity {
 		else {
 			mCountingDown = false;
 		}
+		updateButtons();
 	}
 	
 	private void stopTextCountdown() {
@@ -153,6 +157,20 @@ public class SimpleTimerActivity extends Activity {
 				}
 			}
 		};
+	}
+	
+	private void updateButtons() {
+		mStartButton.setEnabled(!mCountingDown);
+		mNumpad0.setEnabled(!mCountingDown);
+		mNumpad1.setEnabled(!mCountingDown);
+		mNumpad2.setEnabled(!mCountingDown);
+		mNumpad3.setEnabled(!mCountingDown);
+		mNumpad4.setEnabled(!mCountingDown);
+		mNumpad5.setEnabled(!mCountingDown);
+		mNumpad6.setEnabled(!mCountingDown);
+		mNumpad7.setEnabled(!mCountingDown);
+		mNumpad8.setEnabled(!mCountingDown);
+		mNumpad9.setEnabled(!mCountingDown);
 	}
 
 	private void updateTimeView() {
