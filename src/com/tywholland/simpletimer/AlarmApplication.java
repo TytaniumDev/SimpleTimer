@@ -23,12 +23,12 @@ import android.util.Log;
 
 public class AlarmApplication extends Application {
 	public static final String ALARM_INTENT = "alarm";
+	public static final String CANCEL_ALARM = "cancelalarm";
 	public static final int NOTIFICATION_ID = 4439;
 
 	private Vibrator mVibrator;
 	private MediaPlayer mMediaPlayer;
 	private AlarmManager mAlarmManager;
-	private PendingIntent mPendingIntent;
 	private Calendar mCurrentAlarmCalendar;
 	private NotificationManager mNotificationManager;
 
@@ -37,7 +37,6 @@ public class AlarmApplication extends Application {
 		super.onCreate();
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		mAlarmManager = (AlarmManager) getSystemService(Activity.ALARM_SERVICE);
-		mPendingIntent = getTimerPendingIntent();
 		mMediaPlayer = null;
 		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 	}
@@ -59,9 +58,8 @@ public class AlarmApplication extends Application {
 		mCurrentAlarmCalendar.add(Calendar.SECOND, (int) (milliseconds / 1000));
 
 		// Create a new PendingIntent and add it to the AlarmManager
-
 		mAlarmManager.set(AlarmManager.RTC_WAKEUP,
-				mCurrentAlarmCalendar.getTimeInMillis(), mPendingIntent);
+				mCurrentAlarmCalendar.getTimeInMillis(), getTimerPendingIntent(false));
 		showTimerNotification();
 	}
 
@@ -72,8 +70,8 @@ public class AlarmApplication extends Application {
 			mMediaPlayer = null;
 		}
 		mVibrator.cancel();
-		mAlarmManager.cancel(mPendingIntent);
-		mCurrentAlarmCalendar.setTimeInMillis(0);
+		mAlarmManager.cancel(getTimerPendingIntent(false));
+		getCurrentAlarmCalendar().setTimeInMillis(0);
 		removeTimerNotification();
 	}
 
@@ -81,17 +79,26 @@ public class AlarmApplication extends Application {
 		Notification notification = getBaseNotificationBuilder().build();
 		mNotificationManager.notify(NOTIFICATION_ID, notification);
 	}
-	
+
 	public void updateTimerNotificationText(String text) {
 		NotificationCompat.Builder builder = getBaseNotificationBuilder();
 		builder.setContentText(text);
 		mNotificationManager.notify(NOTIFICATION_ID, builder.build());
 	}
 
+	public void updateTimerNotificationAlarmDone() {
+		NotificationCompat.Builder builder = getBaseNotificationBuilder();
+		builder.setContentText(getResources().getString(
+				R.string.notification_done_text))
+				.setOngoing(false)
+				.setDeleteIntent(getTimerPendingIntent(true));
+		mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+	}
+
 	public void removeTimerNotification() {
 		mNotificationManager.cancel(NOTIFICATION_ID);
 	}
-	
+
 	private NotificationCompat.Builder getBaseNotificationBuilder() {
 		Intent notificationIntent = new Intent(this, SimpleTimerActivity.class);
 		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -107,16 +114,18 @@ public class AlarmApplication extends Application {
 		builder.setSmallIcon(icon)
 				.setTicker(res.getString(R.string.notification_popup_msg))
 				.setWhen(when)
+				.setOngoing(true)
 				.setContentIntent(contentIntent)
 				.setContentTitle(res.getString(R.string.app_name))
 				.setContentText(
-						"Ends at: "
-								+ sdf.format(mCurrentAlarmCalendar.getTime()));
+						res.getString(R.string.notification_time_text) + " "
+								+ sdf.format(getCurrentAlarmCalendar().getTime()));
 		return builder;
 	}
 
-	private PendingIntent getTimerPendingIntent() {
+	private PendingIntent getTimerPendingIntent(boolean cancelAlarm) {
 		Intent intent = new Intent(this, AlarmReceiver.class);
+		intent.putExtra(CANCEL_ALARM, cancelAlarm);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
 				intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		return pendingIntent;

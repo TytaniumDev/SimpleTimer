@@ -30,11 +30,13 @@ public class SimpleTimerActivity extends Activity {
 	private TextView mTimeView;
 	private AlarmApplication mAlarmApplication;
 	private CountDownTimer mCountDownTimer;
+	private boolean mCountingDown;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		mCountingDown = false;
 		mAlarmApplication = (AlarmApplication) getApplicationContext();
 		mTime = "";
 		mButton = (Button) findViewById(R.id.startbutton);
@@ -45,6 +47,8 @@ public class SimpleTimerActivity extends Activity {
 						.convertStringToMilliseconds(mTime));
 				stopTextCountdown();
 				startTextCountdown();
+				mTime = "";
+				mCountingDown = true;
 			}
 		});
 		mStopButton = (Button) findViewById(R.id.stopbutton);
@@ -54,6 +58,7 @@ public class SimpleTimerActivity extends Activity {
 				mTimeView.setText(R.string.default_time);
 				mAlarmApplication.stopTimer();
 				stopTextCountdown();
+				mCountingDown = false;
 			}
 		});
 		mTimeView = (TextView) findViewById(R.id.timerTextView);
@@ -104,7 +109,14 @@ public class SimpleTimerActivity extends Activity {
 		if (c != null && c.getTimeInMillis() != 0) {
 			long alarmTime = c.getTimeInMillis();
 			long currentTime = Calendar.getInstance().getTimeInMillis();
-			mCountDownTimer = new CountDownTimer(alarmTime - currentTime, 1000) {
+			long timeDifference = alarmTime - currentTime;
+			if(timeDifference > 0) {
+				mCountingDown = true;
+			}
+			else {
+				mCountingDown = false;
+			}
+			mCountDownTimer = new CountDownTimer(timeDifference, 1000) {
 
 				@Override
 				public void onTick(long millisUntilFinished) {
@@ -116,9 +128,13 @@ public class SimpleTimerActivity extends Activity {
 				@Override
 				public void onFinish() {
 					mTimeView.setText(R.string.default_time);
+					mCountingDown = false;
 				}
 			};
 			mCountDownTimer.start();
+		}
+		else {
+			mCountingDown = false;
 		}
 	}
 	
@@ -131,8 +147,10 @@ public class SimpleTimerActivity extends Activity {
 	private OnClickListener numpadButtonClickListener() {
 		return new OnClickListener() {
 			public void onClick(View v) {
-				mTime = mTime.concat(((Button) v).getText().toString());
-				updateTimeView();
+				if(!mCountingDown) {
+					mTime = mTime.concat(((Button) v).getText().toString());
+					updateTimeView();
+				}
 			}
 		};
 	}
