@@ -57,7 +57,7 @@
 
             <Button
                 android:id="@+id/numpad1"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -65,7 +65,7 @@
 
             <Button
                 android:id="@+id/numpad2"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -73,7 +73,7 @@
 
             <Button
                 android:id="@+id/numpad3"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -88,7 +88,7 @@
 
             <Button
                 android:id="@+id/numpad4"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -96,7 +96,7 @@
 
             <Button
                 android:id="@+id/numpad5"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -104,7 +104,7 @@
 
             <Button
                 android:id="@+id/numpad6"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -119,7 +119,7 @@
 
             <Button
                 android:id="@+id/numpad7"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -127,7 +127,7 @@
 
             <Button
                 android:id="@+id/numpad8"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -135,7 +135,7 @@
 
             <Button
                 android:id="@+id/numpad9"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -150,7 +150,7 @@
 
             <Button
                 android:id="@+id/numpad0"
-                style="@android:style/TextAppearance.Large"
+                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
