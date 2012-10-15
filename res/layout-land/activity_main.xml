@@ -27,18 +27,19 @@
         android:layout_marginRight="16dp" >
 
             <Button
-                android:id="@+id/stopbutton"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="26sp"
-                android:text="@string/stop_clear" />
-
-            <Button
                 android:id="@+id/startbutton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="26sp"
                 android:text="@string/start" />
+
+            <Button
+                android:id="@+id/stopbutton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:text="@string/stop_clear" />   
+
     </LinearLayout>
 
     <TableLayout
