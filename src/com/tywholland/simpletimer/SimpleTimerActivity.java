@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SimpleTimerActivity extends Activity {
 	private static final String ALARM_TIME = "alarmkey";
+	private static final int TIME_MAX_LENGTH = 6;
 
 	private String mTime;
 	private Button mStartButton;
@@ -91,7 +93,7 @@ public class SimpleTimerActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(mCountDownTimer != null) {
+		if (mCountDownTimer != null) {
 			mCountDownTimer.cancel();
 		}
 		startTextCountdown();
@@ -113,10 +115,9 @@ public class SimpleTimerActivity extends Activity {
 			long alarmTime = c.getTimeInMillis();
 			long currentTime = Calendar.getInstance().getTimeInMillis();
 			long timeDifference = alarmTime - currentTime;
-			if(timeDifference > 0) {
+			if (timeDifference > 0) {
 				mCountingDown = true;
-			}
-			else {
+			} else {
 				mCountingDown = false;
 			}
 			mCountDownTimer = new CountDownTimer(timeDifference, 1000) {
@@ -135,13 +136,12 @@ public class SimpleTimerActivity extends Activity {
 				}
 			};
 			mCountDownTimer.start();
-		}
-		else {
+		} else {
 			mCountingDown = false;
 		}
 		updateButtons();
 	}
-	
+
 	private void stopTextCountdown() {
 		if (mCountDownTimer != null) {
 			mCountDownTimer.cancel();
@@ -151,14 +151,20 @@ public class SimpleTimerActivity extends Activity {
 	private OnClickListener numpadButtonClickListener() {
 		return new OnClickListener() {
 			public void onClick(View v) {
-				if(!mCountingDown) {
-					mTime = mTime.concat(((Button) v).getText().toString());
-					updateTimeView();
+				if (!mCountingDown) {
+					if (mTime.length() < TIME_MAX_LENGTH) {
+						mTime = mTime.concat(((Button) v).getText().toString());
+						updateTimeView();
+					} else {
+						Toast.makeText(getApplicationContext(),
+								R.string.time_too_long_warning,
+								Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		};
 	}
-	
+
 	private void updateButtons() {
 		mStartButton.setEnabled(!mCountingDown);
 		mNumpad0.setEnabled(!mCountingDown);
@@ -175,9 +181,11 @@ public class SimpleTimerActivity extends Activity {
 
 	private void updateTimeView() {
 		Integer hours = AlarmUtil.getHoursFromTimeString(mTime);
-    	Integer minutes = AlarmUtil.getMinutesFromTimeString(mTime);
-    	Integer seconds = AlarmUtil.getSecondsFromTimeString(mTime);
-    	mTimeView.setText(String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds));
+		Integer minutes = AlarmUtil.getMinutesFromTimeString(mTime);
+		Integer seconds = AlarmUtil.getSecondsFromTimeString(mTime);
+		mTimeView.setText(String.format("%02d", hours) + ":"
+				+ String.format("%02d", minutes) + ":"
+				+ String.format("%02d", seconds));
 	}
 
 	@Override

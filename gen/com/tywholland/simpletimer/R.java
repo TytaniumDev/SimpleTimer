@@ -57,6 +57,7 @@ public final class R {
         public static final int np9=0x7f04000a;
         public static final int start=0x7f04000c;
         public static final int stop_clear=0x7f04000d;
+        public static final int time_too_long_warning=0x7f040013;
         public static final int title_activity_main=0x7f040001;
     }
 }

@@ -18,4 +18,5 @@
     <string name="notification_content_text">Alarm On</string>
     <string name="notification_time_text">Alarm On</string>
     <string name="notification_done_text">Alarm has finished!</string>
+    <string name="time_too_long_warning">Time input limit reached</string>
 </resources>
