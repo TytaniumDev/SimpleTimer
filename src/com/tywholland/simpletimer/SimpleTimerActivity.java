@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -37,6 +39,10 @@ public class SimpleTimerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(Build.VERSION.SDK_INT >= 9) {
+			//This is only available in SDK 9 and above
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+		}
 		setContentView(R.layout.activity_main);
 		mCountingDown = false;
 		mAlarmApplication = (AlarmApplication) getApplicationContext();

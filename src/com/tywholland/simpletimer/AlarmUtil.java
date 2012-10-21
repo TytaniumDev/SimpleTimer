@@ -1,17 +1,27 @@
 package com.tywholland.simpletimer;
 
-import java.util.concurrent.TimeUnit;
-
 import android.util.Log;
 
 public class AlarmUtil {
 	public static String getTimeStringFromMilliseconds(long milliseconds) {
-		long hours = TimeUnit.MILLISECONDS.toHours(milliseconds);
-		long minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds) - TimeUnit.HOURS.toMinutes(hours);
-		long seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds) - TimeUnit.HOURS.toSeconds(hours) - TimeUnit.MINUTES.toSeconds(minutes);
-		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		long time = milliseconds / 1000;
+		String seconds = Integer.toString((int) (time % 60));
+		String minutes = Integer.toString((int) ((time % 3600) / 60));
+		String hours = Integer.toString((int) (time / 3600));
+		for (int i = 0; i < 2; i++) {
+			if (seconds.length() < 2) {
+				seconds = "0" + seconds;
+			}
+			if (minutes.length() < 2) {
+				minutes = "0" + minutes;
+			}
+			if (hours.length() < 2) {
+				hours = "0" + hours;
+			}
+		}
+		return hours + ":" + minutes + ":" + seconds;
 	}
-	
+
 	public static long convertStringToMilliseconds(String time) {
 		int seconds = getSecondsFromTimeString(time);
 		int minutes = getMinutesFromTimeString(time);

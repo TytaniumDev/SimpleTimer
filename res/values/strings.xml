@@ -14,9 +14,8 @@
     <string name="start">Start</string>
     <string name="stop_clear">Stop/Clear</string>
     <string name="default_time">00:00:00</string>
-    <string name="notification_popup_msg">Alarm Started</string>
-    <string name="notification_content_text">Alarm On</string>
-    <string name="notification_time_text">Alarm On</string>
-    <string name="notification_done_text">Alarm has finished!</string>
+    <string name="notification_popup_msg">Timer Started</string>
+    <string name="notification_alarm_ending_on_text">Timer will end at</string>
+    <string name="notification_done_text">Timer has finished!</string>
     <string name="time_too_long_warning">Time input limit reached</string>
 </resources>

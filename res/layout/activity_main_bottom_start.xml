@@ -14,14 +14,14 @@
         android:textSize="60sp" />
 
     <LinearLayout
+        android:layout_alignParentBottom="true"
         android:id="@+id/startStopLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timerTextView"
         android:orientation="horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_centerHorizontal="true" >
 
             <Button
@@ -46,9 +46,9 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/startStopLayout"
+        android:layout_below="@id/timerTextView"
+        android:layout_above="@id/startStopLayout"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         android:layout_margin="16dp" >
 
         <TableRow

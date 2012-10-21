@@ -37,14 +37,14 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int activity_main_bottom_start=0x7f030001;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
         public static final int default_time=0x7f04000e;
-        public static final int notification_content_text=0x7f040010;
-        public static final int notification_done_text=0x7f040012;
+        public static final int notification_alarm_ending_on_text=0x7f040010;
+        public static final int notification_done_text=0x7f040011;
         public static final int notification_popup_msg=0x7f04000f;
-        public static final int notification_time_text=0x7f040011;
         public static final int np0=0x7f04000b;
         public static final int np1=0x7f040002;
         public static final int np2=0x7f040003;
@@ -57,7 +57,7 @@ public final class R {
         public static final int np9=0x7f04000a;
         public static final int start=0x7f04000c;
         public static final int stop_clear=0x7f04000d;
-        public static final int time_too_long_warning=0x7f040013;
+        public static final int time_too_long_warning=0x7f040012;
         public static final int title_activity_main=0x7f040001;
     }
 }

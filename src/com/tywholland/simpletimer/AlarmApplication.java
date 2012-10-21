@@ -118,7 +118,7 @@ public class AlarmApplication extends Application {
 				.setContentIntent(contentIntent)
 				.setContentTitle(res.getString(R.string.app_name))
 				.setContentText(
-						res.getString(R.string.notification_time_text) + " "
+						res.getString(R.string.notification_alarm_ending_on_text) + " "
 								+ sdf.format(getCurrentAlarmCalendar().getTime()));
 		return builder;
 	}
