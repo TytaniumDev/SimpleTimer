@@ -34,6 +34,7 @@ public class AlarmApplication extends Application {
 	private Calendar mCurrentAlarmCalendar;
 	private NotificationManager mNotificationManager;
 	private SharedPreferences mSettings;
+	private String mTimeString;
 
 	@Override
 	public void onCreate() {
@@ -44,6 +45,7 @@ public class AlarmApplication extends Application {
 		mAlarmManager = (AlarmManager) getSystemService(Activity.ALARM_SERVICE);
 		mMediaPlayer = null;
 		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mTimeString = "";
 	}
 
 	public Calendar getCurrentAlarmCalendar() {
@@ -162,5 +164,17 @@ public class AlarmApplication extends Application {
 		} catch (IOException e) {
 			Log.e("AlarmUtil", "Error in MediaPlayer");
 		}
+	}
+	
+	public String getTimeString() {
+		return mTimeString;
+	}
+
+	public void setTimeString(String mTimeString) {
+		this.mTimeString = mTimeString;
+	}
+	
+	public void appendToTimeString(String append) {
+		this.mTimeString = this.mTimeString.concat(append);
 	}
 }

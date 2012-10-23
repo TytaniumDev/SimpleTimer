@@ -20,7 +20,6 @@ public class SimpleTimerActivity extends Activity {
 	private static final String ALARM_TIME = "alarmkey";
 	private static final int TIME_MAX_LENGTH = 6;
 
-	private String mTime;
 	private Button mStartButton;
 	private Button mNumpad1;
 	private Button mNumpad2;
@@ -58,6 +57,7 @@ public class SimpleTimerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mAlarmApplication = (AlarmApplication) getApplicationContext();
 		if (PreferenceManager.getDefaultSharedPreferences(
 				getApplicationContext()).getBoolean(
 				getString(R.string.key_button_placement), true)) {
@@ -66,17 +66,29 @@ public class SimpleTimerActivity extends Activity {
 			setContentView(R.layout.activity_main_bottom_start);
 		}
 		mCountingDown = false;
-		mAlarmApplication = (AlarmApplication) getApplicationContext();
-		mTime = "";
+
+		restoreTime();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (PreferenceManager.getDefaultSharedPreferences(
+				getApplicationContext()).getBoolean(
+				getString(R.string.key_button_placement), true)) {
+			setContentView(R.layout.activity_main);
+		} else {
+			setContentView(R.layout.activity_main_bottom_start);
+		}
 		mStartButton = (Button) findViewById(R.id.startbutton);
 		mStartButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				mAlarmApplication.stopTimer();
 				mAlarmApplication.startTimer(AlarmUtil
-						.convertStringToMilliseconds(mTime));
+						.convertStringToMilliseconds(mAlarmApplication.getTimeString()));
 				stopTextCountdown();
 				startTextCountdown();
-				mTime = "";
+				mAlarmApplication.setTimeString("");
 				mCountingDown = true;
 				updateButtons();
 			}
@@ -84,7 +96,7 @@ public class SimpleTimerActivity extends Activity {
 		mStopButton = (Button) findViewById(R.id.stopbutton);
 		mStopButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				mTime = "";
+				mAlarmApplication.setTimeString("");
 				mTimeView.setText(R.string.default_time);
 				mAlarmApplication.stopTimer();
 				stopTextCountdown();
@@ -113,13 +125,8 @@ public class SimpleTimerActivity extends Activity {
 		mNumpad7.setOnClickListener(numpadButtonClickListener());
 		mNumpad8.setOnClickListener(numpadButtonClickListener());
 		mNumpad9.setOnClickListener(numpadButtonClickListener());
-		restoreTime();
+		updateTimeView();
 		updateButtons();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
 		if (mCountDownTimer != null) {
 			mCountDownTimer.cancel();
 		}
@@ -179,8 +186,8 @@ public class SimpleTimerActivity extends Activity {
 		return new OnClickListener() {
 			public void onClick(View v) {
 				if (!mCountingDown) {
-					if (mTime.length() < TIME_MAX_LENGTH) {
-						mTime = mTime.concat(((Button) v).getText().toString());
+					if (mAlarmApplication.getTimeString().length() < TIME_MAX_LENGTH) {
+						mAlarmApplication.appendToTimeString(((Button) v).getText().toString());
 						updateTimeView();
 					} else {
 						Toast.makeText(getApplicationContext(),
@@ -207,9 +214,9 @@ public class SimpleTimerActivity extends Activity {
 	}
 
 	private void updateTimeView() {
-		Integer hours = AlarmUtil.getHoursFromTimeString(mTime);
-		Integer minutes = AlarmUtil.getMinutesFromTimeString(mTime);
-		Integer seconds = AlarmUtil.getSecondsFromTimeString(mTime);
+		Integer hours = AlarmUtil.getHoursFromTimeString(mAlarmApplication.getTimeString());
+		Integer minutes = AlarmUtil.getMinutesFromTimeString(mAlarmApplication.getTimeString());
+		Integer seconds = AlarmUtil.getSecondsFromTimeString(mAlarmApplication.getTimeString());
 		mTimeView.setText(String.format("%02d", hours) + ":"
 				+ String.format("%02d", minutes) + ":"
 				+ String.format("%02d", seconds));

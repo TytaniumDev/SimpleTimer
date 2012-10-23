@@ -1,0 +1,33 @@
+<resources>
+    <!-- Thanks to Jose Antonio for the translation! -->
+    <string name="app_name">Temporizador Simple</string>
+    <string name="title_activity_main">Temporizador Simple</string>
+    <string name="np1">1</string>
+    <string name="np2">2</string>
+    <string name="np3">3</string>
+    <string name="np4">4</string>
+    <string name="np5">5</string>
+    <string name="np6">6</string>
+    <string name="np7">7</string>
+    <string name="np8">8</string>
+    <string name="np9">9</string>
+    <string name="np0">0</string>
+    <string name="start">Iniciar</string>
+    <string name="stop_clear">Parar/Limpiar</string>
+    <string name="default_time">00:00:00</string>
+    <string name="notification_popup_msg">Temporizador Iniciado</string>
+    <string name="notification_alarm_ending_on_text">El temporizador terminará a las</string>
+    <string name="notification_done_text">¡El temporizador ha terminado!</string>
+    <string name="time_too_long_warning">Se ha alcanzado el límite de tiempo</string>
+    <string name="menu_settings">Ajustes</string>
+    <!-- Settings Keys -->
+    <string name="key_vibrate">VIBRATE_KEY</string>
+    <string name="key_alarm_sound">ALARM_SOUND_KEY</string>
+    <string name="key_button_placement">BUTTON_PLACEMENT_KEY</string>
+    <!-- Settings Descriptions -->
+    <string name="desc_vibrate">Vibración</string>
+    <string name="desc_alarm_sound">Sonido de alarma</string>
+    <string name="desc_button_placement">Iniciar/Parar arriba</string>
+    <string name="summ_button_placement_top">Botones en la parte superior</string>
+    <string name="summ_button_placement_bottom">Botones en la parte inferior</string>
+</resources>
