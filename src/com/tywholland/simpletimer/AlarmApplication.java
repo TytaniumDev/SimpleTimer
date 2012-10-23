@@ -12,12 +12,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -31,10 +33,13 @@ public class AlarmApplication extends Application {
 	private AlarmManager mAlarmManager;
 	private Calendar mCurrentAlarmCalendar;
 	private NotificationManager mNotificationManager;
+	private SharedPreferences mSettings;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		mSettings = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		mAlarmManager = (AlarmManager) getSystemService(Activity.ALARM_SERVICE);
 		mMediaPlayer = null;
@@ -59,7 +64,8 @@ public class AlarmApplication extends Application {
 
 		// Create a new PendingIntent and add it to the AlarmManager
 		mAlarmManager.set(AlarmManager.RTC_WAKEUP,
-				mCurrentAlarmCalendar.getTimeInMillis(), getTimerPendingIntent(false));
+				mCurrentAlarmCalendar.getTimeInMillis(),
+				getTimerPendingIntent(false));
 		showTimerNotification();
 	}
 
@@ -88,10 +94,9 @@ public class AlarmApplication extends Application {
 
 	public void updateTimerNotificationAlarmDone() {
 		NotificationCompat.Builder builder = getBaseNotificationBuilder();
-		builder.setContentText(getResources().getString(
-				R.string.notification_done_text))
-				.setOngoing(false)
-				.setDeleteIntent(getTimerPendingIntent(true));
+		builder.setContentText(
+				getResources().getString(R.string.notification_done_text))
+				.setOngoing(false).setDeleteIntent(getTimerPendingIntent(true));
 		mNotificationManager.notify(NOTIFICATION_ID, builder.build());
 	}
 
@@ -118,8 +123,10 @@ public class AlarmApplication extends Application {
 				.setContentIntent(contentIntent)
 				.setContentTitle(res.getString(R.string.app_name))
 				.setContentText(
-						res.getString(R.string.notification_alarm_ending_on_text) + " "
-								+ sdf.format(getCurrentAlarmCalendar().getTime()));
+						res.getString(R.string.notification_alarm_ending_on_text)
+								+ " "
+								+ sdf.format(getCurrentAlarmCalendar()
+										.getTime()));
 		return builder;
 	}
 
@@ -133,13 +140,19 @@ public class AlarmApplication extends Application {
 
 	public void notifyUser() {
 		playSound();
-		mVibrator.vibrate(new long[] { 0, 200, 500 }, 0);
+		if (mSettings.getBoolean(getString(R.string.key_vibrate), true)) {
+			mVibrator.vibrate(new long[] { 0, 200, 500 }, 0);
+		}
 	}
 
 	private void playSound() {
 		try {
+			String alarmSound = mSettings.getString(
+					getString(R.string.key_alarm_sound), null);
+			Uri alarmUri = alarmSound != null ? Uri.parse(alarmSound)
+					: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 			mMediaPlayer = new MediaPlayer();
-			mMediaPlayer.setDataSource(this, getAlarmUri());
+			mMediaPlayer.setDataSource(this, alarmUri);
 			final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 			if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
 				mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
@@ -149,20 +162,5 @@ public class AlarmApplication extends Application {
 		} catch (IOException e) {
 			Log.e("AlarmUtil", "Error in MediaPlayer");
 		}
-	}
-
-	private Uri getAlarmUri() {
-		// Get an alarm sound. Try for an alarm. If none set, try notification,
-		// Otherwise, ringtone.
-		Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-		if (alert == null) {
-			alert = RingtoneManager
-					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-			if (alert == null) {
-				alert = RingtoneManager
-						.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-			}
-		}
-		return alert;
 	}
 }

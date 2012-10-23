@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <RingtonePreference
+        android:defaultValue="content://settings/system/notification_sound"
+        android:key="@string/key_alarm_sound"
+        android:ringtoneType="alarm"
+        android:showDefault="true"
+        android:showSilent="false"
+        android:title="@string/desc_alarm_sound" />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/key_vibrate"
+        android:title="@string/desc_vibrate" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/key_button_placement"
+        android:summaryOff="@string/summ_button_placement_bottom"
+        android:summaryOn="@string/summ_button_placement_top"
+        android:title="@string/desc_button_placement" />
+
+</PreferenceScreen>

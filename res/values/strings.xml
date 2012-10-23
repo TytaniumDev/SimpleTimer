@@ -18,4 +18,15 @@
     <string name="notification_alarm_ending_on_text">Timer will end at</string>
     <string name="notification_done_text">Timer has finished!</string>
     <string name="time_too_long_warning">Time input limit reached</string>
+    <string name="menu_settings">Settings</string>
+    <!-- Settings Keys -->
+	 <string name="key_vibrate">VIBRATE_KEY</string>    
+	 <string name="key_alarm_sound">ALARM_SOUND_KEY</string>    
+	 <string name="key_button_placement">BUTTON_PLACEMENT_KEY</string>    
+    <!-- Settings Descriptions -->
+	 <string name="desc_vibrate">Vibrate</string>    
+	 <string name="desc_alarm_sound">Alarm Sound</string>    
+	 <string name="desc_button_placement">Start/Stop on top</string>    
+	 <string name="summ_button_placement_top">Buttons on top</string>    
+	 <string name="summ_button_placement_bottom">Buttons on bottom</string>    
 </resources>

@@ -3,11 +3,13 @@ package com.tywholland.simpletimer;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -37,13 +39,32 @@ public class SimpleTimerActivity extends Activity {
 	private boolean mCountingDown;
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_settings:
+			startActivity(new Intent(getApplicationContext(), Settings.class));
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(Build.VERSION.SDK_INT >= 9) {
-			//This is only available in SDK 9 and above
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+		if (PreferenceManager.getDefaultSharedPreferences(
+				getApplicationContext()).getBoolean(
+				getString(R.string.key_button_placement), true)) {
+			setContentView(R.layout.activity_main);
+		} else {
+			setContentView(R.layout.activity_main_bottom_start);
 		}
-		setContentView(R.layout.activity_main);
 		mCountingDown = false;
 		mAlarmApplication = (AlarmApplication) getApplicationContext();
 		mTime = "";
