@@ -23,10 +23,14 @@
 	 <string name="key_vibrate">VIBRATE_KEY</string>    
 	 <string name="key_alarm_sound">ALARM_SOUND_KEY</string>    
 	 <string name="key_button_placement">BUTTON_PLACEMENT_KEY</string>    
+	 <string name="key_twenty_four_hour">TWENTY_FOUR_HOUR_KEY</string>    
     <!-- Settings Descriptions -->
 	 <string name="desc_vibrate">Vibrate</string>    
 	 <string name="desc_alarm_sound">Alarm Sound</string>    
 	 <string name="desc_button_placement">Start/Stop on top</string>    
 	 <string name="summ_button_placement_top">Buttons on top</string>    
 	 <string name="summ_button_placement_bottom">Buttons on bottom</string>    
+	 <string name="desc_twenty_four_hour">24 Hour</string>    
+	 <string name="summ_twenty_four_hour_on">24 Hour in Notification</string>    
+	 <string name="summ_twenty_four_hour_off">AM/PM in Notification</string>    
 </resources>

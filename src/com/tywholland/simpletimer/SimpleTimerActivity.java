@@ -85,7 +85,8 @@ public class SimpleTimerActivity extends Activity {
 			public void onClick(View v) {
 				mAlarmApplication.stopTimer();
 				mAlarmApplication.startTimer(AlarmUtil
-						.convertStringToMilliseconds(mAlarmApplication.getTimeString()));
+						.convertStringToMilliseconds(mAlarmApplication
+								.getTimeString()));
 				stopTextCountdown();
 				startTextCountdown();
 				mAlarmApplication.setTimeString("");
@@ -131,6 +132,10 @@ public class SimpleTimerActivity extends Activity {
 			mCountDownTimer.cancel();
 		}
 		startTextCountdown();
+		if (!mCountingDown) {
+			// Stop timer when app is launched if timer is not active
+			mAlarmApplication.stopTimer();
+		}
 	}
 
 	private void restoreTime() {
@@ -187,7 +192,8 @@ public class SimpleTimerActivity extends Activity {
 			public void onClick(View v) {
 				if (!mCountingDown) {
 					if (mAlarmApplication.getTimeString().length() < TIME_MAX_LENGTH) {
-						mAlarmApplication.appendToTimeString(((Button) v).getText().toString());
+						mAlarmApplication.appendToTimeString(((Button) v)
+								.getText().toString());
 						updateTimeView();
 					} else {
 						Toast.makeText(getApplicationContext(),
@@ -214,9 +220,12 @@ public class SimpleTimerActivity extends Activity {
 	}
 
 	private void updateTimeView() {
-		Integer hours = AlarmUtil.getHoursFromTimeString(mAlarmApplication.getTimeString());
-		Integer minutes = AlarmUtil.getMinutesFromTimeString(mAlarmApplication.getTimeString());
-		Integer seconds = AlarmUtil.getSecondsFromTimeString(mAlarmApplication.getTimeString());
+		Integer hours = AlarmUtil.getHoursFromTimeString(mAlarmApplication
+				.getTimeString());
+		Integer minutes = AlarmUtil.getMinutesFromTimeString(mAlarmApplication
+				.getTimeString());
+		Integer seconds = AlarmUtil.getSecondsFromTimeString(mAlarmApplication
+				.getTimeString());
 		mTimeView.setText(String.format("%02d", hours) + ":"
 				+ String.format("%02d", minutes) + ":"
 				+ String.format("%02d", seconds));

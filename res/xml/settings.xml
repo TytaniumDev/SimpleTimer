@@ -19,5 +19,11 @@
         android:summaryOff="@string/summ_button_placement_bottom"
         android:summaryOn="@string/summ_button_placement_top"
         android:title="@string/desc_button_placement" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/key_twenty_four_hour"
+        android:summaryOff="@string/summ_twenty_four_hour_off"
+        android:summaryOn="@string/summ_twenty_four_hour_on"
+        android:title="@string/desc_twenty_four_hour" />
 
 </PreferenceScreen>

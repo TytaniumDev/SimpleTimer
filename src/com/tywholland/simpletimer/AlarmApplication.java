@@ -117,7 +117,13 @@ public class AlarmApplication extends Application {
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(
 				this);
 		Resources res = getResources();
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss aa");
+		SimpleDateFormat sdf;
+		if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(getString(R.string.key_twenty_four_hour), false)) {
+			sdf = new SimpleDateFormat("kk:mm:ss");
+		}
+		else {
+			sdf = new SimpleDateFormat("hh:mm:ss aa");
+		}
 		builder.setSmallIcon(icon)
 				.setTicker(res.getString(R.string.notification_popup_msg))
 				.setWhen(when)
