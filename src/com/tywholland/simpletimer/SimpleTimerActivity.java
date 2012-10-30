@@ -13,11 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class SimpleTimerActivity extends Activity {
 	private static final String ALARM_TIME = "alarmkey";
+	private static final String ALARM_NAME = "alarmnamekey";
 	private static final int TIME_MAX_LENGTH = 6;
 
 	private Button mStartButton;
@@ -33,6 +35,7 @@ public class SimpleTimerActivity extends Activity {
 	private Button mNumpad0;
 	private Button mStopButton;
 	private TextView mTimeView;
+	private EditText mAlarmNameView;
 	private AlarmApplication mAlarmApplication;
 	private CountDownTimer mCountDownTimer;
 	private boolean mCountingDown;
@@ -67,7 +70,7 @@ public class SimpleTimerActivity extends Activity {
 		}
 		mCountingDown = false;
 
-		restoreTime();
+		restoreText();
 	}
 
 	@Override
@@ -84,6 +87,7 @@ public class SimpleTimerActivity extends Activity {
 		mStartButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				mAlarmApplication.stopTimer();
+				mAlarmApplication.setAlarmName(mAlarmNameView.getText().toString());
 				mAlarmApplication.startTimer(AlarmUtil
 						.convertStringToMilliseconds(mAlarmApplication
 								.getTimeString()));
@@ -98,6 +102,8 @@ public class SimpleTimerActivity extends Activity {
 		mStopButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				mAlarmApplication.setTimeString("");
+				mAlarmApplication.setAlarmName("");
+				mAlarmNameView.setText("");
 				mTimeView.setText(R.string.default_time);
 				mAlarmApplication.stopTimer();
 				stopTextCountdown();
@@ -105,6 +111,9 @@ public class SimpleTimerActivity extends Activity {
 				updateButtons();
 			}
 		});
+		mAlarmNameView = (EditText) findViewById(R.id.alarmNameEditText);
+		mAlarmNameView.setText(mAlarmApplication.getAlarmName());
+		mAlarmNameView.clearFocus();
 		mTimeView = (TextView) findViewById(R.id.timerTextView);
 		mNumpad0 = (Button) findViewById(R.id.numpad0);
 		mNumpad1 = (Button) findViewById(R.id.numpad1);
@@ -138,13 +147,15 @@ public class SimpleTimerActivity extends Activity {
 		}
 	}
 
-	private void restoreTime() {
+	private void restoreText() {
 		SharedPreferences settings = getPreferences(0);
 		if (settings != null) {
 			long milliseconds = settings.getLong(ALARM_TIME, 0);
 			Calendar c = Calendar.getInstance();
 			c.setTimeInMillis(milliseconds);
 			mAlarmApplication.setCurrentAlarmCalendar(c);
+			String alarmName = settings.getString(ALARM_NAME, "");
+			mAlarmApplication.setAlarmName(alarmName);
 		}
 	}
 
@@ -229,6 +240,15 @@ public class SimpleTimerActivity extends Activity {
 		mTimeView.setText(String.format("%02d", hours) + ":"
 				+ String.format("%02d", minutes) + ":"
 				+ String.format("%02d", seconds));
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		SharedPreferences settings = getPreferences(0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(ALARM_NAME, mAlarmNameView.getText().toString());
+		editor.commit();
 	}
 
 	@Override

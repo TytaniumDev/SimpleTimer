@@ -1,4 +1,5 @@
 <resources>
+
     <!-- Thanks to Jose Antonio for the translation! -->
     <string name="app_name">Temporizador Simple</string>
     <string name="title_activity_main">Temporizador Simple</string>
@@ -20,18 +21,20 @@
     <string name="notification_done_text">¡El temporizador ha terminado!</string>
     <string name="time_too_long_warning">Se ha alcanzado el límite de tiempo</string>
     <string name="menu_settings">Ajustes</string>
+    <string name="alarm_name_hint">Temporizador Nombre</string> 
     <!-- Settings Keys -->
     <string name="key_vibrate">VIBRATE_KEY</string>
     <string name="key_alarm_sound">ALARM_SOUND_KEY</string>
     <string name="key_button_placement">BUTTON_PLACEMENT_KEY</string>
-    <string name="key_twenty_four_hour">TWENTY_FOUR_HOUR_KEY</string> 
+    <string name="key_twenty_four_hour">TWENTY_FOUR_HOUR_KEY</string>
     <!-- Settings Descriptions -->
     <string name="desc_vibrate">Vibración</string>
     <string name="desc_alarm_sound">Sonido de alarma</string>
     <string name="desc_button_placement">Iniciar/Parar arriba</string>
     <string name="summ_button_placement_top">Botones en la parte superior</string>
     <string name="summ_button_placement_bottom">Botones en la parte inferior</string>
-    <string name="desc_twenty_four_hour">24 Horas</string>    
-	 <string name="summ_twenty_four_hour_on">24 Horas en la Notificación</string>    
-	 <string name="summ_twenty_four_hour_off">AM/PM en la Notificación</string> 
+    <string name="desc_twenty_four_hour">24 Horas</string>
+    <string name="summ_twenty_four_hour_on">24 Horas en la Notificación</string>
+    <string name="summ_twenty_four_hour_off">AM/PM en la Notificación</string>
+
 </resources>

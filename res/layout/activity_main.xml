@@ -3,11 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <EditText
+        android:id="@+id/alarmNameEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:hint="@string/alarm_name_hint"
+        android:inputType="textCapSentences"
+        android:singleLine="true"
+        android:textSize="22sp" >
+    </EditText>
+
     <TextView
         android:id="@+id/timerTextView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/alarmNameEditText"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/default_time"
@@ -18,38 +35,36 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/timerTextView"
-        android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/stopbutton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="4dp"
-                android:textSize="24sp"
-                android:text="@string/stop_clear" />
+        <Button
+            android:id="@+id/stopbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:text="@string/stop_clear"
+            android:textSize="24sp" />
 
-            <Button
-                android:id="@+id/startbutton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:textSize="24sp"
-                android:layout_weight="1"
-                android:text="@string/start" />
+        <Button
+            android:id="@+id/startbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:text="@string/start"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
         android:layout_below="@id/startStopLayout"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp" >
+        android:layout_margin="8dp" >
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -59,27 +74,27 @@
 
             <Button
                 android:id="@+id/numpad1"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np1" />
+                android:text="@string/np1"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/numpad2"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np2" />
+                android:text="@string/np2"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/numpad3"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np3" />
+                android:text="@string/np3"
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -90,27 +105,27 @@
 
             <Button
                 android:id="@+id/numpad4"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np4" />
+                android:text="@string/np4"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/numpad5"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np5" />
+                android:text="@string/np5"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/numpad6"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np6" />
+                android:text="@string/np6"
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -121,27 +136,27 @@
 
             <Button
                 android:id="@+id/numpad7"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np7" />
+                android:text="@string/np7"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/numpad8"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np8" />
+                android:text="@string/np8"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/numpad9"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np9" />
+                android:text="@string/np9"
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -152,11 +167,12 @@
 
             <Button
                 android:id="@+id/numpad0"
-                android:textSize="24sp"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="@string/np0" />
+                android:text="@string/np0"
+                android:textSize="24sp" />
         </TableRow>
     </TableLayout>
+
 </RelativeLayout>

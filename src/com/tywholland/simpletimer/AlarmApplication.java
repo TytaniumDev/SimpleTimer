@@ -35,6 +35,7 @@ public class AlarmApplication extends Application {
 	private NotificationManager mNotificationManager;
 	private SharedPreferences mSettings;
 	private String mTimeString;
+	private String mAlarmName;
 
 	@Override
 	public void onCreate() {
@@ -46,6 +47,7 @@ public class AlarmApplication extends Application {
 		mMediaPlayer = null;
 		mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mTimeString = "";
+		mAlarmName = "";
 	}
 
 	public Calendar getCurrentAlarmCalendar() {
@@ -129,13 +131,17 @@ public class AlarmApplication extends Application {
 				.setWhen(when)
 				.setOngoing(true)
 				.setContentIntent(contentIntent)
-				.setContentTitle(res.getString(R.string.app_name))
+				.setContentTitle(getNotificationAlarmTitle())
 				.setContentText(
 						res.getString(R.string.notification_alarm_ending_on_text)
 								+ " "
 								+ sdf.format(getCurrentAlarmCalendar()
 										.getTime()));
 		return builder;
+	}
+	
+	private String getNotificationAlarmTitle() {
+		return mAlarmName.length() > 0 ? mAlarmName : getString(R.string.app_name);
 	}
 
 	private PendingIntent getTimerPendingIntent(boolean cancelAlarm) {
@@ -182,5 +188,13 @@ public class AlarmApplication extends Application {
 	
 	public void appendToTimeString(String append) {
 		this.mTimeString = this.mTimeString.concat(append);
+	}
+	
+	public String getAlarmName() {
+		return mAlarmName;
+	}
+
+	public void setAlarmName(String alarmName) {
+		this.mAlarmName = alarmName;
 	}
 }
