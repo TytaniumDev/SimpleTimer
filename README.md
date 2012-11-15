@@ -1,6 +1,6 @@
+![Simple Timer Icon][2]
 Simple Timer
 =================
-![Simple Timer Icon][2]
 
 Simple Timer is a timer app with a button layout similar to a microwave. Instead of using scrolling number pickers like most other timer apps, Simple Timer lets you press just a few buttons to input an exact timer length.
 
