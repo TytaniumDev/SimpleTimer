@@ -4,7 +4,7 @@
 
 Simple Timer is a timer app with a button layout similar to a microwave. Instead of using scrolling number pickers like most other timer apps, Simple Timer lets you press just a few buttons to input an exact timer length.
 
-This app was developed about a month before I saw the Android 4.2 clock app, which uses the same layout as my app. My goal with this app now is to improve upon Google's clock app and make it available to older versions of Android. I don't plan on implementing the alarm feature of the clock app though, because all versions of Android have that at least.
+This app was developed about a month before I saw the Android 4.2 clock app, which uses the same layout as my app. My goal with this app now is to improve upon Google's clock app and make it available to older versions of Android. I don't plan on implementing the alarm feature of the clock app however, because all versions of Android have that.
 
 Try it out and let me know of any issues/improvements you think I could make to the app. Please either email me directly or open an issue on GitHub, I can't respond to comments on the Play Store page.
 
