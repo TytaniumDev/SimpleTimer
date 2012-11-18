@@ -3,6 +3,8 @@ package com.tywholland.simpletimer;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+import com.tywholland.simpletimer.R;
+
 public class Settings extends PreferenceActivity {
 	@SuppressWarnings("deprecation")
 	@Override

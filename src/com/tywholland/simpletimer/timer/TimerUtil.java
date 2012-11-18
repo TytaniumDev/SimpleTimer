@@ -1,13 +1,14 @@
-package com.tywholland.simpletimer;
+package com.tywholland.simpletimer.timer;
 
 import android.util.Log;
 
-public class AlarmUtil {
+public class TimerUtil {
 	public static String getTimeStringFromMilliseconds(long milliseconds) {
-		long time = milliseconds / 1000;
-		String seconds = Integer.toString((int) (time % 60));
-		String minutes = Integer.toString((int) ((time % 3600) / 60));
-		String hours = Integer.toString((int) (time / 3600));
+		String seconds = Integer
+				.toString(getSecondsFromMilliseconds(milliseconds));
+		String minutes = Integer
+				.toString(getMinutesFromMilliseconds(milliseconds));
+		String hours = Integer.toString(getHoursFromMilliseconds(milliseconds));
 		for (int i = 0; i < 2; i++) {
 			if (seconds.length() < 2) {
 				seconds = "0" + seconds;
@@ -20,6 +21,21 @@ public class AlarmUtil {
 			}
 		}
 		return hours + ":" + minutes + ":" + seconds;
+	}
+
+	public static int getHoursFromMilliseconds(long milliseconds) {
+		long time = milliseconds / 1000;
+		return (int) (time / 3600);
+	}
+
+	public static int getMinutesFromMilliseconds(long milliseconds) {
+		long time = milliseconds / 1000;
+		return (int) ((time % 3600) / 60);
+	}
+
+	public static int getSecondsFromMilliseconds(long milliseconds) {
+		long time = milliseconds / 1000;
+		return (int) (time % 60);
 	}
 
 	public static long convertStringToMilliseconds(String time) {

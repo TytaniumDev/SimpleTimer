@@ -1,34 +1,38 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tywholland.simpletimer"
-    android:versionCode="14"
-    android:versionName="1.4" >
+    android:versionCode="15"
+    android:versionName="1.5" >
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="17" />
 
     <application
-        android:name="com.tywholland.simpletimer.AlarmApplication"
+        android:name="com.tywholland.simpletimer.SimpleTimerApplication"
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".SimpleTimerActivity"
+            android:name=".timer.TimerActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver android:name="AlarmReceiver" />
+        
+        <receiver android:name=".timer.TimerReceiver" />
 
         <activity
             android:name=".Settings"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
+        
+        <service
+            android:enabled="true"
+            android:name=".timer.TimerService" />
     </application>
 
 </manifest>

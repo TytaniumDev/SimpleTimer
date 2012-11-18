@@ -1,4 +1,4 @@
-package com.tywholland.simpletimer;
+package com.tywholland.simpletimer.timer;
 
 import java.util.Calendar;
 
@@ -17,7 +17,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SimpleTimerActivity extends Activity {
+import com.tywholland.simpletimer.R;
+import com.tywholland.simpletimer.Settings;
+import com.tywholland.simpletimer.SimpleTimerApplication;
+
+public class TimerActivity extends Activity {
 	private static final String ALARM_TIME = "alarmkey";
 	private static final String ALARM_NAME = "alarmnamekey";
 	private static final int TIME_MAX_LENGTH = 6;
@@ -36,7 +40,7 @@ public class SimpleTimerActivity extends Activity {
 	private Button mStopButton;
 	private TextView mTimeView;
 	private EditText mAlarmNameView;
-	private AlarmApplication mAlarmApplication;
+	private SimpleTimerApplication mAlarmApplication;
 	private CountDownTimer mCountDownTimer;
 	private boolean mCountingDown;
 
@@ -60,7 +64,7 @@ public class SimpleTimerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mAlarmApplication = (AlarmApplication) getApplicationContext();
+		mAlarmApplication = (SimpleTimerApplication) getApplicationContext();
 		if (PreferenceManager.getDefaultSharedPreferences(
 				getApplicationContext()).getBoolean(
 				getString(R.string.key_button_placement), true)) {
@@ -87,8 +91,9 @@ public class SimpleTimerActivity extends Activity {
 		mStartButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				mAlarmApplication.stopTimer();
-				mAlarmApplication.setAlarmName(mAlarmNameView.getText().toString());
-				mAlarmApplication.startTimer(AlarmUtil
+				mAlarmApplication.setAlarmName(mAlarmNameView.getText()
+						.toString());
+				mAlarmApplication.startTimer(TimerUtil
 						.convertStringToMilliseconds(mAlarmApplication
 								.getTimeString()));
 				stopTextCountdown();
@@ -175,7 +180,7 @@ public class SimpleTimerActivity extends Activity {
 				@Override
 				public void onTick(long millisUntilFinished) {
 					mTimeView
-							.setText(AlarmUtil
+							.setText(TimerUtil
 									.getTimeStringFromMilliseconds(millisUntilFinished));
 				}
 
@@ -231,17 +236,17 @@ public class SimpleTimerActivity extends Activity {
 	}
 
 	private void updateTimeView() {
-		Integer hours = AlarmUtil.getHoursFromTimeString(mAlarmApplication
+		Integer hours = TimerUtil.getHoursFromTimeString(mAlarmApplication
 				.getTimeString());
-		Integer minutes = AlarmUtil.getMinutesFromTimeString(mAlarmApplication
+		Integer minutes = TimerUtil.getMinutesFromTimeString(mAlarmApplication
 				.getTimeString());
-		Integer seconds = AlarmUtil.getSecondsFromTimeString(mAlarmApplication
+		Integer seconds = TimerUtil.getSecondsFromTimeString(mAlarmApplication
 				.getTimeString());
 		mTimeView.setText(String.format("%02d", hours) + ":"
 				+ String.format("%02d", minutes) + ":"
 				+ String.format("%02d", seconds));
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();

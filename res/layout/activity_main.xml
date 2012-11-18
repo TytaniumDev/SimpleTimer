@@ -4,12 +4,14 @@
     android:layout_height="match_parent" >
 
     <!-- Stop auto focusing the EditText -->
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:focusable="true"
         android:focusableInTouchMode="true" >
+
         <requestFocus />
     </LinearLayout>
 
@@ -68,121 +70,12 @@
             android:textSize="24sp" />
     </LinearLayout>
 
-    <TableLayout
+    <include
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@id/startStopLayout"
         android:layout_centerHorizontal="true"
-        android:layout_margin="8dp" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/numpad1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np1"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/numpad2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np2"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/numpad3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np3"
-                android:textSize="24sp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/numpad4"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np4"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/numpad5"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np5"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/numpad6"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np6"
-                android:textSize="24sp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/numpad7"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np7"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/numpad8"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np8"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/numpad9"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np9"
-                android:textSize="24sp" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow4"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-
-            <Button
-                android:id="@+id/numpad0"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/np0"
-                android:textSize="24sp" />
-        </TableRow>
-    </TableLayout>
+        layout="@layout/numpad" />
 
 </RelativeLayout>
