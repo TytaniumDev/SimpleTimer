@@ -49,4 +49,4 @@ License
 
  [1]: https://play.google.com/store/apps/details?id=com.tywholland.simpletimer
  [2]: https://lh5.ggpht.com/dCCTjrYM-dXAkDUbWvZHmoL9HPnszJdvjJPT7QNsVA-ARxje5WFq7gM5FV4aANKN68s=w124
- [3]: https://lh4.ggpht.com/E-7GDw6QAO7XJedPMw97kX_kbsW8o4Cnx-CgWwcOFtdm9ck6QOijihTwmSEsIoyJXQ
+ [3]: https://lh5.ggpht.com/paRuAbar1i8HXtpzvcOB4UhLWGK8BBeiTI824NMyRtq_UeJeE9TAfccyTJkOG289V59s
