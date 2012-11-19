@@ -4,22 +4,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.tywholland.simpletimer.SimpleTimerApplication;
-
 public class TimerReceiver extends BroadcastReceiver {
 	public static final long SECOND = 1000;
 	public static final long MINUTE = SECOND * 60;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		TimerNotificationHandler handler = ((SimpleTimerApplication) context
-				.getApplicationContext()).getTimerNotificationHandler();
-		if (intent
-				.getBooleanExtra(TimerNotificationHandler.CANCEL_ALARM, false)) {
+		TimerNotificationUtil handler = new TimerNotificationUtil(context);
+		if (intent.getBooleanExtra(TimerNotificationUtil.CANCEL_ALARM, false)) {
 			handler.cancelTimer();
 		} else {
 			long millisecondsLeft = intent.getLongExtra(
-					TimerNotificationHandler.MILLISECONDS_LEFT_KEY, 0);
+					TimerNotificationUtil.MILLISECONDS_LEFT_KEY, 0);
 			if (millisecondsLeft <= SECOND) {
 				handler.timerFinished();
 			} else {
@@ -44,14 +40,14 @@ public class TimerReceiver extends BroadcastReceiver {
 						handler.updateNotificationContentText(handler
 								.getHoursMinutesText(millisecondsLeft));
 					} else {
-						//Update in 1 minute
+						// Update in 1 minute
 						millisecondsLeft -= MINUTE;
 						handler.setAlarm(MINUTE, millisecondsLeft);
 						handler.updateNotificationContentText(handler
 								.getHoursMinutesText(millisecondsLeft));
 					}
 				} else {
-					//Only seconds left, update every second
+					// Only seconds left, update every second
 					millisecondsLeft -= SECOND;
 					handler.updateNotificationContentText(handler
 							.getSecondsText(millisecondsLeft));

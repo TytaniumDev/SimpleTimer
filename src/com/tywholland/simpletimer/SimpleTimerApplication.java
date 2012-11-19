@@ -3,8 +3,13 @@ package com.tywholland.simpletimer;
 import java.io.IOException;
 import java.util.Calendar;
 
+import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -14,16 +19,19 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.tywholland.simpletimer.timer.TimerNotificationHandler;
+import com.tywholland.simpletimer.timer.TimerActivity;
+import com.tywholland.simpletimer.timer.TimerNotificationUtil;
+import com.tywholland.simpletimer.timer.TimerReceiver;
 
 public class SimpleTimerApplication extends Application {
+	private static final int PENDING_INTENT_ID = 94549;
+
 	private Vibrator mVibrator;
 	private MediaPlayer mMediaPlayer;
 	private Calendar mCurrentAlarmCalendar;
 	private SharedPreferences mSettings;
 	private String mTimeString;
 	private String mAlarmName;
-	private TimerNotificationHandler mTimerNotificationHandler;
 
 	@Override
 	public void onCreate() {
@@ -31,7 +39,6 @@ public class SimpleTimerApplication extends Application {
 		mSettings = PreferenceManager
 				.getDefaultSharedPreferences(getApplicationContext());
 		mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		mTimerNotificationHandler = new TimerNotificationHandler(this);
 		mMediaPlayer = null;
 		mTimeString = "";
 		mAlarmName = "";
@@ -52,11 +59,26 @@ public class SimpleTimerApplication extends Application {
 	public void startTimer(long milliseconds) {
 		mCurrentAlarmCalendar = Calendar.getInstance();
 		mCurrentAlarmCalendar.add(Calendar.SECOND, (int) (milliseconds / 1000));
-		mTimerNotificationHandler.startTimer(getNotificationAlarmTitle(), milliseconds);
+		Intent intent = new Intent();
+		intent.putExtra(TimerNotificationUtil.MILLISECONDS_LEFT_KEY,
+				milliseconds);
+		intent.putExtra(TimerNotificationUtil.TIMER_NAME_KEY, getNotificationAlarmTitle());
+		PendingIntent pendingIntent = getTimerPendingIntent(milliseconds, false);
+		((AlarmManager) getSystemService(Activity.ALARM_SERVICE)).set(
+				AlarmManager.RTC_WAKEUP, Calendar.getInstance()
+						.getTimeInMillis(), pendingIntent);
 	}
-	
+
 	public void stopTimer() {
-		mTimerNotificationHandler.cancelTimer();
+		((AlarmManager) getSystemService(Activity.ALARM_SERVICE))
+				.cancel(PendingIntent.getBroadcast(getApplicationContext(),
+						PENDING_INTENT_ID, new Intent(getApplicationContext(),
+								TimerActivity.class),
+						PendingIntent.FLAG_CANCEL_CURRENT));
+		((NotificationManager) getApplicationContext().getSystemService(
+				Context.NOTIFICATION_SERVICE))
+				.cancel(TimerNotificationUtil.NOTIFICATION_ID);
+		stopNotifyingUser();
 	}
 
 	public void stopNotifyingUser() {
@@ -70,8 +92,7 @@ public class SimpleTimerApplication extends Application {
 	}
 
 	private String getNotificationAlarmTitle() {
-		return mAlarmName.length() > 0 ? mAlarmName
-				: getString(R.string.timer);
+		return mAlarmName.length() > 0 ? mAlarmName : getString(R.string.timer);
 	}
 
 	public void notifyUser() {
@@ -100,6 +121,18 @@ public class SimpleTimerApplication extends Application {
 		}
 	}
 
+	public PendingIntent getTimerPendingIntent(long millisecondsLeft,
+			boolean cancel) {
+		Intent intent = new Intent(getApplicationContext(), TimerReceiver.class);
+		intent.putExtra(TimerNotificationUtil.MILLISECONDS_LEFT_KEY,
+				millisecondsLeft);
+		intent.putExtra(TimerNotificationUtil.CANCEL_ALARM, cancel);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(
+				getApplicationContext(), PENDING_INTENT_ID, intent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		return pendingIntent;
+	}
+
 	public String getTimeString() {
 		return mTimeString;
 	}
@@ -118,9 +151,5 @@ public class SimpleTimerApplication extends Application {
 
 	public void setAlarmName(String alarmName) {
 		this.mAlarmName = alarmName;
-	}
-	
-	public TimerNotificationHandler getTimerNotificationHandler() {
-		return mTimerNotificationHandler;
 	}
 }

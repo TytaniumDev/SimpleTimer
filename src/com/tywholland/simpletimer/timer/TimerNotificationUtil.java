@@ -17,11 +17,12 @@ import android.support.v4.app.NotificationCompat;
 import com.tywholland.simpletimer.R;
 import com.tywholland.simpletimer.SimpleTimerApplication;
 
-public class TimerNotificationHandler {
+public class TimerNotificationUtil {
 	public static final String MILLISECONDS_LEFT_KEY = "ms_left";
 	public static final String CANCEL_ALARM = "cancelalarm";
+	public static final String TIMER_NAME_KEY = "timer_name";
 
-	private static final int NOTIFICATION_ID = 4439;
+	public static final int NOTIFICATION_ID = 4439;
 
 	private NotificationManager mNotificationManager;
 	private NotificationCompat.Builder mNotificationBuilder;
@@ -29,18 +30,17 @@ public class TimerNotificationHandler {
 	private SimpleTimerApplication mApplication;
 	private PendingIntent mPendingIntent;
 
-	public TimerNotificationHandler(SimpleTimerApplication application) {
-		mApplication = application;
-		mApplication.getApplicationContext();
+	public TimerNotificationUtil(Context context) {
+		mApplication = (SimpleTimerApplication) context.getApplicationContext();
 		mAlarmManager = (AlarmManager) mApplication
 				.getSystemService(Activity.ALARM_SERVICE);
 		mNotificationManager = (NotificationManager) mApplication
 				.getApplicationContext().getSystemService(
 						Context.NOTIFICATION_SERVICE);
+		mNotificationBuilder = getBaseNotificationBuilder();
 	}
 
 	public void startTimer(String title, long milliseconds) {
-		mNotificationBuilder = getBaseNotificationBuilder();
 		mNotificationBuilder.setContentTitle(getTitleText(title, milliseconds))
 				.setContentText(
 						TimerUtil.getTimeStringFromMilliseconds(milliseconds));
@@ -56,7 +56,7 @@ public class TimerNotificationHandler {
 	}
 
 	protected void setAlarm(long timeToAlarm, long millisecondsLeft) {
-		mPendingIntent = getTimerPendingIntent(millisecondsLeft, false);
+		mPendingIntent = mApplication.getTimerPendingIntent(millisecondsLeft, false);
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.SECOND, (int) (timeToAlarm / 1000));
 		mAlarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
@@ -75,9 +75,7 @@ public class TimerNotificationHandler {
 		} else {
 			sdf = new SimpleDateFormat("h:mm:ss aa", Locale.getDefault());
 		}
-		return timerName
-				+ " - "
-				+ sdf.format(time.getTime());
+		return timerName + " - " + sdf.format(time.getTime());
 	}
 
 	protected String getHoursMinutesText(long milliseconds) {
@@ -131,7 +129,7 @@ public class TimerNotificationHandler {
 						mApplication.getResources().getString(
 								R.string.notification_done_text))
 				.setOngoing(false)
-				.setDeleteIntent(getTimerPendingIntent(-1, true));
+				.setDeleteIntent(mApplication.getTimerPendingIntent(-1, true));
 		mNotificationManager.notify(NOTIFICATION_ID,
 				mNotificationBuilder.build());
 	}
@@ -145,7 +143,7 @@ public class TimerNotificationHandler {
 				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		PendingIntent contentIntent = PendingIntent.getActivity(
 				mApplication.getApplicationContext(), 0, notificationIntent,
-				PendingIntent.FLAG_CANCEL_CURRENT);
+				PendingIntent.FLAG_UPDATE_CURRENT);
 		int icon = R.drawable.ic_launcher;
 		long when = System.currentTimeMillis();
 
@@ -158,17 +156,5 @@ public class TimerNotificationHandler {
 				.setContentIntent(contentIntent);
 
 		return builder;
-	}
-
-	private PendingIntent getTimerPendingIntent(long millisecondsLeft,
-			boolean cancel) {
-		Intent intent = new Intent(mApplication.getApplicationContext(),
-				TimerReceiver.class);
-		intent.putExtra(MILLISECONDS_LEFT_KEY, millisecondsLeft);
-		intent.putExtra(CANCEL_ALARM, cancel);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(
-				mApplication.getApplicationContext(), 0, intent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
-		return pendingIntent;
 	}
 }
