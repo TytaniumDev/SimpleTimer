@@ -93,7 +93,7 @@ public class TimerActivity extends Activity {
 				mAlarmApplication.stopTimer();
 				mAlarmApplication.setAlarmName(mAlarmNameView.getText()
 						.toString());
-				mAlarmApplication.startTimer(TimerUtil
+				mAlarmApplication.startTimer(TimeConversionUtil
 						.convertStringToMilliseconds(mAlarmApplication
 								.getTimeString()));
 				stopTextCountdown();
@@ -180,7 +180,7 @@ public class TimerActivity extends Activity {
 				@Override
 				public void onTick(long millisUntilFinished) {
 					mTimeView
-							.setText(TimerUtil
+							.setText(TimeConversionUtil
 									.getTimeStringFromMilliseconds(millisUntilFinished));
 				}
 
@@ -236,11 +236,11 @@ public class TimerActivity extends Activity {
 	}
 
 	private void updateTimeView() {
-		Integer hours = TimerUtil.getHoursFromTimeString(mAlarmApplication
+		Integer hours = TimeConversionUtil.getHoursFromTimeString(mAlarmApplication
 				.getTimeString());
-		Integer minutes = TimerUtil.getMinutesFromTimeString(mAlarmApplication
+		Integer minutes = TimeConversionUtil.getMinutesFromTimeString(mAlarmApplication
 				.getTimeString());
-		Integer seconds = TimerUtil.getSecondsFromTimeString(mAlarmApplication
+		Integer seconds = TimeConversionUtil.getSecondsFromTimeString(mAlarmApplication
 				.getTimeString());
 		mTimeView.setText(String.format("%02d", hours) + ":"
 				+ String.format("%02d", minutes) + ":"

@@ -10,51 +10,46 @@ public class TimerReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		TimerNotificationUtil handler = new TimerNotificationUtil(context);
-		if (intent.getBooleanExtra(TimerNotificationUtil.CANCEL_ALARM, false)) {
-			handler.cancelTimer();
+		String title = intent.getStringExtra(TimerUtil.TITLE_KEY);
+		long millisecondsLeft = intent.getLongExtra(
+				TimerUtil.MILLISECONDS_LEFT_KEY, 0);
+		if (intent.getBooleanExtra(TimerUtil.CANCEL_ALARM_KEY, false)) {
+			TimerUtil.stopTimer(context.getApplicationContext());
+		} else if (millisecondsLeft <= SECOND) {
+			TimerUtil.alertTimerHasFinished(context.getApplicationContext(),
+					title);
 		} else {
-			long millisecondsLeft = intent.getLongExtra(
-					TimerNotificationUtil.MILLISECONDS_LEFT_KEY, 0);
-			if (millisecondsLeft <= SECOND) {
-				handler.timerFinished();
-			} else {
-				int hours = TimerUtil
-						.getHoursFromMilliseconds(millisecondsLeft);
-				int minutes = TimerUtil
-						.getMinutesFromMilliseconds(millisecondsLeft);
-				int seconds = TimerUtil
-						.getSecondsFromMilliseconds(millisecondsLeft);
-				if (hours > 0 || minutes > 0) {
-					// Set next update at minute breakpoint, or update at 59
-					// seconds
-					if (hours == 0 && minutes == 1 && seconds == 0) {
-						millisecondsLeft -= SECOND;
-						handler.setAlarm(SECOND, millisecondsLeft);
-						handler.updateNotificationContentText(handler
-								.getSecondsText(millisecondsLeft));
-					} else if (seconds > 0) {
-						// Set update to next minute breakpoint
-						millisecondsLeft -= seconds * SECOND;
-						handler.setAlarm((seconds * SECOND), millisecondsLeft);
-						handler.updateNotificationContentText(handler
-								.getHoursMinutesText(millisecondsLeft));
-					} else {
-						// Update in 1 minute
-						millisecondsLeft -= MINUTE;
-						handler.setAlarm(MINUTE, millisecondsLeft);
-						handler.updateNotificationContentText(handler
-								.getHoursMinutesText(millisecondsLeft));
-					}
-				} else {
-					// Only seconds left, update every second
+			int hours = TimeConversionUtil
+					.getHoursFromMilliseconds(millisecondsLeft);
+			int minutes = TimeConversionUtil
+					.getMinutesFromMilliseconds(millisecondsLeft);
+			int seconds = TimeConversionUtil
+					.getSecondsFromMilliseconds(millisecondsLeft);
+			if (hours > 0 || minutes > 0) {
+				// Set next update at minute breakpoint, or update at 59 seconds
+				if (hours == 0 && minutes == 1 && seconds == 0) {
 					millisecondsLeft -= SECOND;
-					handler.updateNotificationContentText(handler
-							.getSecondsText(millisecondsLeft));
-					handler.setAlarm(SECOND, millisecondsLeft);
+					TimerUtil.setAlarm(context.getApplicationContext(), SECOND,
+							millisecondsLeft, title);
+				} else if (seconds > 0) {
+					// Set update to next minute breakpoint
+					millisecondsLeft -= seconds * SECOND;
+					TimerUtil.setAlarm(context.getApplicationContext(),
+							(seconds * SECOND), millisecondsLeft, title);
+				} else {
+					// Update in 1 minute
+					millisecondsLeft -= MINUTE;
+					TimerUtil.setAlarm(context.getApplicationContext(), MINUTE,
+							millisecondsLeft, title);
 				}
+			} else {
+				// Only seconds left, update every second
+				millisecondsLeft -= SECOND;
+				TimerUtil.setAlarm(context.getApplicationContext(), SECOND,
+						millisecondsLeft, title);
 			}
+			TimerUtil.updateNotificationContentText(
+					context.getApplicationContext(), title, millisecondsLeft);
 		}
 	}
-
 }
