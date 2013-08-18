@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <style name="numpad">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize" tools:ignore="SpUsage">@dimen/numpad_text_size</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:gravity">center</item>
         <item name="android:background">@drawable/numpad_background</item>
     </style>
 

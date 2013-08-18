@@ -15,48 +15,41 @@
         <requestFocus />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/alarmNameEditText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_toLeftOf="@+id/numpadTable"
-        android:ellipsize="none"
-        android:gravity="center"
-        android:hint="@string/alarm_name_hint"
-        android:inputType="textCapSentences"
-        android:singleLine="true"
-        android:textSize="22sp" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/timerTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/alarmNameEditText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center"
-        android:text="@string/default_time"
-        android:textSize="60sp" />
-
     <LinearLayout
         android:id="@+id/startStopLayout"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/timerTextView"
         android:layout_margin="8dp"
-        android:layout_toLeftOf="@+id/numpadTable"
+        android:gravity="center_vertical"
         android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/alarmNameEditText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="none"
+            android:gravity="center"
+            android:hint="@string/alarm_name_hint"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:textSize="22sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:text="@string/default_time"
+            android:textSize="@dimen/timer_text_size" />
 
         <Button
             android:id="@+id/startbutton"
@@ -75,10 +68,10 @@
 
     <include
         android:id="@+id/numpadTable"
-        android:layout_width="fill_parent"
+        android:layout_toRightOf="@+id/startStopLayout"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/timerTextView"
         layout="@layout/numpad" />
 
 </RelativeLayout>
