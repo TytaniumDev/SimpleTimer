@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- Stop auto focusing the EditText -->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true" >
+
+        <requestFocus />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/alarmNameEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="none"
+        android:gravity="center"
+        android:hint="@string/alarm_name_hint"
+        android:inputType="textCapSentences"
+        android:singleLine="true"
+        android:textSize="22sp" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/alarmNameEditText"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/default_time"
+        android:textSize="@dimen/timer_text_size" />
+
+    <LinearLayout
+        android:id="@+id/startStopLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/stopbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:text="@string/stop_clear"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/startbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:text="@string/start"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/startStopLayout"
+        android:layout_below="@id/timerTextView"
+        android:layout_centerHorizontal="true"
+        layout="@layout/numpad" />
+
+</RelativeLayout><!-- From: file:/C:/Users/tywho_000/Documents/GitHub/SimpleTimerGradle/app/src/main/res/layout/activity_main_bottom_start.xml -->

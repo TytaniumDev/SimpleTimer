@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <include
+        android:id="@+id/numpadTable"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        layout="@layout/activity_main" >
+    </include>
+
+</LinearLayout><!-- From: file:/C:/Users/tywho_000/Documents/GitHub/SimpleTimerGradle/app/src/main/res/layout-land/activity_main_bottom_start.xml -->

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\tywho_000\Documents\GitHub\SimpleTimerGradle\app\build\intermediates\pre-dexed\debug\classes-00f86b5542844553eeed0fab514a3023610a4d00.jar"
+        jar="C:\Users\tywho_000\Documents\GitHub\SimpleTimerGradle\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="C:\Users\tywho_000\Documents\GitHub\SimpleTimerGradle\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-dccf962e0f670aae4c480402de5a73e406594238.jar"
+        jar="C:\Users\tywho_000\Documents\GitHub\SimpleTimerGradle\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="C:\Users\tywho_000\Documents\GitHub\SimpleTimerGradle\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-a7d7c81b5e6a584f27ff03796721268feedce901.jar"
+        jar="C:\Program Files (x86)\Android\android-studio-beta\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+
+</pre-dex-items>
